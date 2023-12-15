@@ -35,17 +35,18 @@ public class JumpManager {
             p.sendMessage("§c§lParcours annulé !");
             stopJumpTimer();
             p.getInventory().setItem(5, new ItemStack(Material.AIR));
-            p.getInventory().remove(Material.SLIME_BALL);
+            p.getInventory().setItem(3, new ItemStack(Material.AIR));;
             p.setLevel(0);
         }
     }
 
-    public void handlePlayerQuit(Player p) {
-        if (inJump && p.getInventory().contains(Material.BED)) {
+    public void playerDisconnect(Player p) {
+        if (inJump) {
+            inJump = false;
             stopJumpTimer();
-            p.sendMessage("§c§lParcours annulé !");
+            p.sendMessage("§c§lParcours annulé ! (Déconnexion)");
             p.getInventory().setItem(5, new ItemStack(Material.AIR));
-            p.getInventory().remove(Material.SLIME_BALL);
+            p.getInventory().setItem(3, new ItemStack(Material.AIR));;
             p.setLevel(0);
             removeCheckpoint();
         }
@@ -75,17 +76,17 @@ public class JumpManager {
         }, 0L, 20L);
     }
     
-    public void finishJump(Player player) {
+    public void finishJump(Player p) {
         if (inJump) {
             inJump = false;
             stopJumpTimer();
             long endTime = System.currentTimeMillis();
             long elapsedTime = endTime - startTime;
             long seconds = elapsedTime / 1000;
-            player.sendMessage("§a§lVous avez terminé le parcours en " + seconds + " secondes !");
-            player.getInventory().setItem(5, new ItemStack(Material.AIR));
-            player.getInventory().remove(Material.SLIME_BALL);
-            player.setLevel(0);
+            p.sendMessage("§a§lVous avez terminé le parcours en " + seconds + " secondes !");
+            p.getInventory().setItem(5, new ItemStack(Material.AIR));
+            p.getInventory().setItem(3, new ItemStack(Material.AIR));;
+            p.setLevel(0);
         }
     }
 
