@@ -1,4 +1,4 @@
-Spigot Version : 1.8.9
+Spigot Version : 1.8.8
 
 Java Version: 8
 
