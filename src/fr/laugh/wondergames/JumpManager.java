@@ -22,7 +22,7 @@ public class JumpManager {
         if (!inJump) {
             inJump = true;
             startTime = System.currentTimeMillis();
-            p.sendMessage("§a§lParcours commencé !");
+            p.sendMessage("§a§lParkours commencé !");
             giveCancelItem(p);
             giveCheckpointItem(p);
             startJumpTimer(p);
@@ -45,7 +45,7 @@ public class JumpManager {
         if (inJump) {
             inJump = false;
             stopJumpTimer();
-            p.sendMessage("§c§lParcours annulé ! (Déconnexion)");
+            p.sendMessage("§c§lParkours annulé ! (Déconnexion)");
             p.getInventory().setItem(5, new ItemStack(Material.AIR));
             p.getInventory().setItem(3, new ItemStack(Material.AIR));;
             p.setLevel(0);
@@ -85,7 +85,7 @@ public class JumpManager {
             long elapsedTime = endTime - startTime;
             long seconds = elapsedTime / 1000;
             removeCheckpoint();
-            p.sendMessage("§a§lVous avez terminé le parcours en " + seconds + " secondes !");
+            p.sendMessage("§a§lVous avez terminé le parkour en " + seconds + " secondes !");
             p.getInventory().setItem(5, new ItemStack(Material.AIR));
             p.getInventory().setItem(3, new ItemStack(Material.AIR));;
             p.setLevel(0);
