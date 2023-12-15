@@ -47,10 +47,10 @@ public class Listeners implements Listener {
   
   @EventHandler
   public void onPlayerQuit(PlayerQuitEvent e) {
-      Player p = e.getPlayer();
-      if (this.jumpManager.hasCheckpoint() && p.getLocation().distance(this.jumpManager.getCheckpoint()) < 1.0D) {
-          this.jumpManager.removeCheckpoint();
-      }
-      this.jumpManager.cancelJump(p);
+      Player p = e.getPlayer(); 
+      if (this.jumpManager.hasCheckpoint() && p.getLocation().distance(this.jumpManager.getCheckpoint()) < 1.0D) { // Check
+          this.jumpManager.removeCheckpoint(); // Check
+      } 
+      this.jumpManager.cancelJump(p); // Check
   }
 }
