@@ -34,8 +34,9 @@ public class JumpManager {
             inJump = false;
             p.sendMessage("§c§lParcours annulé !");
             stopJumpTimer();
+            removeCheckpoint();
             p.getInventory().setItem(5, new ItemStack(Material.AIR));
-            p.getInventory().setItem(3, new ItemStack(Material.AIR));
+            p.getInventory().setItem(3, new ItemStack(Material.AIR));;
             p.setLevel(0);
         }
     }
@@ -46,7 +47,7 @@ public class JumpManager {
             stopJumpTimer();
             p.sendMessage("§c§lParcours annulé ! (Déconnexion)");
             p.getInventory().setItem(5, new ItemStack(Material.AIR));
-            p.getInventory().setItem(3, new ItemStack(Material.AIR));
+            p.getInventory().setItem(3, new ItemStack(Material.AIR));;
             p.setLevel(0);
             removeCheckpoint();
         }
@@ -83,9 +84,10 @@ public class JumpManager {
             long endTime = System.currentTimeMillis();
             long elapsedTime = endTime - startTime;
             long seconds = elapsedTime / 1000;
+            removeCheckpoint();
             p.sendMessage("§a§lVous avez terminé le parcours en " + seconds + " secondes !");
             p.getInventory().setItem(5, new ItemStack(Material.AIR));
-            p.getInventory().setItem(3, new ItemStack(Material.AIR));
+            p.getInventory().setItem(3, new ItemStack(Material.AIR));;
             p.setLevel(0);
         }
     }
