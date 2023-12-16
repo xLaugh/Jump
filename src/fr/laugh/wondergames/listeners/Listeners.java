@@ -36,6 +36,8 @@ public class Listeners implements Listener {
       } 
     } else if (e.getAction().name().contains("RIGHT_CLICK") && hand.getType() == Material.BED) {
       this.jumpManager.cancelJump(p);
+    } else if (e.getAction().name().contains("RIGHT_CLICK") && hand.getType() == Material.WOOD_DOOR) {
+    	p.teleport(jumpspawn);
     } else if (e.getAction().name().contains("RIGHT_CLICK") && hand.getType() == Material.SLIME_BALL) {
       if (this.jumpManager.hasCheckpoint()) {
         p.teleport(this.jumpManager.getCheckpoint());
