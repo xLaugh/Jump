@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class Listeners implements Listener {
   private final JumpManager jumpManager;
+    private Location jumpspawn = new Location(Bukkit.getWorld("world"), -195.5, 67, -8.5, 58.5f, 0.5f);
   
   public Listeners(JumpManager jumpManager) {
     this.jumpManager = jumpManager;
