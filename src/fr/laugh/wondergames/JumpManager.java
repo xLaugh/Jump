@@ -22,9 +22,10 @@ public class JumpManager {
         if (!inJump) {
             inJump = true;
             startTime = System.currentTimeMillis();
-            p.sendMessage("§a§lParkours commencé !");
+            p.sendMessage("§a§lParkour commencé !");
             giveCancelItem(p);
             giveCheckpointItem(p);
+            giveBackItem(p);
             startJumpTimer(p);
         }
     }
@@ -32,11 +33,12 @@ public class JumpManager {
     public void cancelJump(Player p) {
         if (inJump) {
             inJump = false;
-            p.sendMessage("§c§lParcours annulé !");
+            p.sendMessage("§c§lParkour annulé !");
             stopJumpTimer();
             removeCheckpoint();
             p.getInventory().setItem(5, new ItemStack(Material.AIR));
-            p.getInventory().setItem(3, new ItemStack(Material.AIR));;
+            p.getInventory().setItem(4, new ItemStack(Material.AIR));
+            p.getInventory().setItem(3, new ItemStack(Material.AIR));
             p.setLevel(0);
         }
     }
@@ -45,9 +47,10 @@ public class JumpManager {
         if (inJump) {
             inJump = false;
             stopJumpTimer();
-            p.sendMessage("§c§lParkours annulé ! (Déconnexion)");
+            p.sendMessage("§c§lParkour annulé ! (Déconnexion)");
             p.getInventory().setItem(5, new ItemStack(Material.AIR));
-            p.getInventory().setItem(3, new ItemStack(Material.AIR));;
+            p.getInventory().setItem(4, new ItemStack(Material.AIR));
+            p.getInventory().setItem(3, new ItemStack(Material.AIR));
             p.setLevel(0);
             removeCheckpoint();
         }
@@ -87,7 +90,8 @@ public class JumpManager {
             removeCheckpoint();
             p.sendMessage("§a§lVous avez terminé le parkour en " + seconds + " secondes !");
             p.getInventory().setItem(5, new ItemStack(Material.AIR));
-            p.getInventory().setItem(3, new ItemStack(Material.AIR));;
+            p.getInventory().setItem(4, new ItemStack(Material.AIR));
+            p.getInventory().setItem(3, new ItemStack(Material.AIR));
             p.setLevel(0);
         }
     }
@@ -110,6 +114,14 @@ public class JumpManager {
         slimem.setDisplayName("§aSe téléporter au checkpoint");
         slime.setItemMeta(slimem);
         p.getInventory().setItem(3, slime);
+    }
+    
+    private void giveBackItem(Player p) {
+        ItemStack door = new ItemStack(Material.WOOD_DOOR);
+        ItemMeta doorm = door.getItemMeta();
+        doorm.setDisplayName("§cRéinitialiser");
+        door.setItemMeta(doorm);
+        p.getInventory().setItem(4, door);
     }
 
     private void updateXPBar(Player p) {
