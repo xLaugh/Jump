@@ -1,12 +1,16 @@
 package fr.laugh.wondergames.listeners;
 
 import fr.laugh.wondergames.JumpManager;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -50,10 +54,32 @@ public class Listeners implements Listener {
   
   @EventHandler
   public void onPlayerQuit(PlayerQuitEvent e) {
-      Player p = e.getPlayer(); 
-      if (this.jumpManager.hasCheckpoint() && p.getLocation().distance(this.jumpManager.getCheckpoint()) < 1.0D) { // Check
-          this.jumpManager.removeCheckpoint(); // Check
-      } 
-      this.jumpManager.cancelJump(p); // Check
+      Player p = e.getPlayer();
+      if (this.jumpManager.hasCheckpoint() && p.getLocation().distance(this.jumpManager.getCheckpoint()) < 1.0D) { // A Check
+          this.jumpManager.removeCheckpoint(); // A Check
+      }
+      this.jumpManager.cancelJump(p); // A Check
   }
+  
+  @EventHandler
+  public void onPlayerMove(PlayerMoveEvent e) {
+      Player p = e.getPlayer();
+      Location a = e.getFrom();
+      Location b = e.getTo();
+
+      if (jumpManager.isPlayerInJump()) {
+          if (a.getY() > b.getY() && a.getY() - b.getY() > 1.2) {
+              handlePlayerFall(p);
+          }
+      }
+  }
+
+  private void handlePlayerFall(Player p) {
+	    if (jumpManager.hasCheckpoint()) {
+	        p.teleport(jumpManager.getCheckpoint());
+	    } else {
+	        p.teleport(jumpspawn);
+	    }
+	}
+
 }
